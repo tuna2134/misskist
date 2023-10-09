@@ -21,6 +21,8 @@ jobs:
       run: poetry install
     - name: Build document
       run: cd docs && poetry run make html
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
     - name: Upload document
       uses: actions/upload-page-artiface@v2
       with:
