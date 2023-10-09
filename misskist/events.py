@@ -10,6 +10,14 @@ if TYPE_CHECKING:
 
 
 class Channel:
+    """
+    チャンネルイベント
+
+    Parameters
+    ----------
+    channel_type: :class:`ChannelType`
+        チャンネルの種類
+    """
     def __init_subclass__(cls, *, channel_type: ChannelType):
         cls.channel_type = channel_type
         cls.events = {}
@@ -31,7 +39,17 @@ class Channel:
         for event in self.events.get(name, []):
             self.client.loop.create_task(event(*args))
 
-    def add_event(self, name: str, func):
+    def add_event(self, name: str, func: EventFunction):
+        """
+        イベントを追加します。
+        
+        Parameters
+        ----------
+        name: :class:`str`
+            イベント名
+        func: :class:`EventFunction`
+            イベントの関数
+        """
         if name not in self.events:
             self.events[name] = [func]
         else:

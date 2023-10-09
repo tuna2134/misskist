@@ -8,3 +8,12 @@ class Object:
 
     def __init__(self, id: str):
         self.id = id
+
+
+__all__ = (
+    "Client",
+    "Object",
+    "ChannelType",
+    "Channel",
+    "on_event",
+)
