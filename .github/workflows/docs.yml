@@ -27,3 +27,4 @@ jobs:
         path: docs/_build/html
     - name: Deploy pages
       uses: actions/deploy-pages@v2
+      id: deployment
