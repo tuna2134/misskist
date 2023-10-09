@@ -12,7 +12,7 @@ class GlobalChannel(Channel, channel_type=ChannelType.global_timeline):
 async def main():
     client = Client("misskey.io", loop=asyncio.get_running_loop())
     await client.add_channel(GlobalChannel())
-    await client.connect("1ato2t9c7WaKJgqv8AjcRkQljdtPgMjG")
+    await client.connect("token")
 
 
 asyncio.run(main())
