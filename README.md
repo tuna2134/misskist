@@ -1,5 +1,5 @@
 # misskist
-This library is refer discord.py.
+This library is refer [discord.py](https://github.com/Rapptz/discord.py)
 
 ## sample
 ```py
