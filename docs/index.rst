@@ -14,6 +14,7 @@ Welcome to misskist's documentation!
    misskist/client
    misskist/events
    misskist/note
+   misskist/enums
 
 
 Indices and tables

@@ -2,6 +2,14 @@ from enum import Enum
 
 
 class ChannelType(Enum):
+    """
+    チャンネルのタイプ
+    
+    Attributes
+    ----------
+    global_timeline:
+        グローバルタイムライン
+    """
     global_timeline = 0
 
 
