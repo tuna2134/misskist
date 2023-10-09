@@ -15,8 +15,8 @@ class StreamingClient:
         self.socket = socket
 
     @classmethod
-    async def connect(cls, client: Client, token: str):
-        socket = await client._rest.ws_connect(token)
+    async def connect(cls, client: Client):
+        socket = await client._rest.ws_connect()
         self = cls(client, socket)
         return self
 

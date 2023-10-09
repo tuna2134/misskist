@@ -27,25 +27,25 @@ class Client:
         self.channels = {}
         self._wait_channels = []
 
-    async def on_connect(self):
+    async def on_connect(self) -> None:
         self._not_connected = False
         for channel in self._wait_channels:
             await channel._connect()
             self.channels[channel.uid] = channel
 
-    def set_token(self, token: str):
+    def set_token(self, token: str) -> None:
         self._rest.token = token
 
-    async def connect(self, token: str):
-        self._streaming = await StreamingClient.connect(self, token)
+    async def connect(self) -> None:
+        self._streaming = await StreamingClient.connect(self)
         self.loop.create_task(self.on_connect())
         await self._streaming.get_event_always()
 
-    async def start(self, token: str):
+    async def start(self, token: str) -> None:
         self.set_token(token)
-        await self.connect(token)
+        await self.connect()
 
-    async def add_channel(self, channel: Channel):
+    async def add_channel(self, channel: Channel) -> None:
         channel._inject(self)
         if not self._not_connected:
             await channel._connect()

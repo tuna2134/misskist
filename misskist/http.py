@@ -44,19 +44,20 @@ class RestAPI:
         if res.status == 204:
             return None
         elif res.status == 200:
-            if res.headers.get("Content-Type") == "application/json":
-                return await res.json()
+            if res.headers.get("Content-Type").split(";")[0] == "application/json":
+                data = await res.json()
+                return data
             else:
                 return res
         elif res.status == 404:
             raise NotFound(route)
 
-    def ws_connect(self, token: str):
+    def ws_connect(self):
         if self.ssl:
             url = "wss://" + self.endpoint
         else:
             url = "ws://" + self.endpoint
-        return self._session.ws_connect(url + "/streaming?i=" + token)
+        return self._session.ws_connect(url + "/streaming?i=" + self.token)
 
     async def create_note(self, data: dict):
         return await self.request(Route("POST", "/notes/create"), json=data)
