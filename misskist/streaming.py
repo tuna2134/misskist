@@ -29,15 +29,17 @@ class StreamingClient:
         if data["type"] == "channel":
             id_ = data["body"]["id"]
             if data["body"]["type"] == "note":
-                self.client.channels[id_].dispatch("on_note", Note(data["body"]["body"]))
-    
+                self.client.channels[id_].dispatch(
+                    "on_note", Note(data["body"]["body"])
+                )
+
     async def connect_channel(self, channel: ChannelType):
         id_ = str(uuid.uuid4())
         data = {
             "type": "connect",
             "body": {
                 "id": id_,
-            }
+            },
         }
         if channel == ChannelType.global_timeline:
             data["body"]["channel"] = "globalTimeline"

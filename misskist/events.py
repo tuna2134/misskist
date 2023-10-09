@@ -21,12 +21,12 @@ class Channel:
                 print(func.event_name)
                 func.event = self
                 self.add_event(func.event_name, func)
-    
+
     async def _connect(self):
         uid = await self.client._streaming.connect_channel(self.channel_type)
         self.uid = uid
         self.client.channels[uid] = self
-    
+
     def dispatch(self, name: str, *args):
         for event in self.events.get(name, []):
             self.client.loop.create_task(event(*args))
@@ -42,7 +42,7 @@ class EventFunction:
     def __init__(self, event_name: str, func):
         self.func = func
         self.event_name = event_name
-    
+
     async def __call__(self, *args):
         await self.func(self.event, *args)
 
@@ -50,4 +50,5 @@ class EventFunction:
 def on_event(event_name: str):
     def wrapper(func):
         return EventFunction("on_" + event_name, func)
+
     return wrapper
