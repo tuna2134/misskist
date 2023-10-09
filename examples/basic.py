@@ -15,7 +15,7 @@ async def main():
     await client.add_channel(GlobalChannel())
     token = getenv("TOKEN")
     client.set_token(token)
-    print(await client.create_note("Hello, World!"))
+    await client.create_note("Hello, World!")
     await client.connect()
 
 
