@@ -54,6 +54,13 @@ class Channel:
             self.events[name] = [func]
         else:
             self.events[name].append(func)
+    
+    def on_event(self, event_name: str):
+        def decorator(func):
+            func = EventFunction(event_name, func)
+            self.add_event(event_name, func)
+            return func
+        return decorator
 
 
 class EventFunction:
