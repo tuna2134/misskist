@@ -56,6 +56,14 @@ class Channel:
             self.events[name].append(func)
     
     def on_event(self, event_name: str):
+        """
+        イベントを追加します。
+        
+        Parameters
+        ----------
+        event_name: :class:`str`
+            イベント名
+        """
         def decorator(func):
             func = EventFunction(event_name, func)
             self.add_event(event_name, func)
